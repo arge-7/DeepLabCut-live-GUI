@@ -49,7 +49,7 @@ class OpenCVCam(Camera):
         """ Returns a dictionary of arguments restrictions for DLCLiveGUI
         """
 
-        cap = cv2.VideoCapture()
+        cap = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
         devs = [-1]
         avail = True
         while avail:
