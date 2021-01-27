@@ -123,7 +123,7 @@ class OpenCVCam(Camera):
         if not self.video:
 
             self.cap = (
-                cv2.VideoCapture(self.id, cv2.CAP_V4L)
+                cv2.VideoCapture(self.id, cv2.CAP_GSTREAMER)
                 if platform.system() == "Linux"
                 else cv2.VideoCapture(self.id)
             )
