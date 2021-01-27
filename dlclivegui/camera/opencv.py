@@ -123,7 +123,7 @@ class OpenCVCam(Camera):
         if not self.video:
 
             self.cap = (
-                cv2.VideoCapture(self.id, cv2.CAP_GSTREAMER)
+                cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
                 if platform.system() == "Linux"
                 else cv2.VideoCapture(self.id)
             )
@@ -143,7 +143,7 @@ class OpenCVCam(Camera):
 
         else:
 
-            self.cap = cv2.VideoCapture(self.id)
+            self.cap = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
 
             # self.im_size = (self.cap.get(cv2.CAP_PROP_FRAME_WIDTH), self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             # self.fps = self.cap.get(cv2.CAP_PROP_FPS)
