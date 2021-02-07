@@ -47,8 +47,8 @@ class OpenCVCam(Camera):
     def arg_restrictions():
         """ Returns a dictionary of arguments restrictions for DLCLiveGUI
         """
-
-        cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=2),cv2.CAP_GSTREAMER)
+        camSet='nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=3264, height=2464, framerate=21/1,format=NV12 ! nvvidconv flip-method='+str(flip)+' ! video/x-raw, width='+str(width)+', height='+str(height)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'
+        cap = cv2.VideoCapture(camSet, cv2.CAP_GSTREAMER)
         devs = [-1]
         avail = True
         while avail:
@@ -122,9 +122,9 @@ class OpenCVCam(Camera):
         if not self.video:
 
             self.cap = (
-                cv2.VideoCapture(self.id, cv2.CAP_V4L)
-                if platform.system() == "Linux"
-                else cv2.VideoCapture(self.id)
+                cv2.VideoCapture(camSet, cv2.CAP_GSTREAMER)
+                #if platform.system() == "Linux"
+                #else cv2.VideoCapture(self.id)
             )
             ret, frame = self.cap.read()
 
@@ -142,7 +142,7 @@ class OpenCVCam(Camera):
 
         else:
 
-            self.cap = cv2.VideoCapture(self.id)
+            self.cap = cv2.VideoCapture(camSet, cv2.CAP_GSTREAMER)
 
             # self.im_size = (self.cap.get(cv2.CAP_PROP_FRAME_WIDTH), self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
             # self.fps = self.cap.get(cv2.CAP_PROP_FPS)
