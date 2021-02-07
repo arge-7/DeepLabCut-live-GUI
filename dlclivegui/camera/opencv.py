@@ -160,7 +160,7 @@ class OpenCVCam(Camera):
                 pass
 
         ret, frame = self.cap.read()
-
+        keyCode = cv2.waitKey(0)
         if ret:
             if self.rotate:
                 frame = rotate_bound(frame, self.rotate)
